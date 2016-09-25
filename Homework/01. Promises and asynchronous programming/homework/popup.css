@@ -1,0 +1,13 @@
+body {
+    margin: auto;
+    text-align: center;
+}
+
+#target {
+    display: none;
+    width: 200px;
+    height: 40px;
+    font-size: 30px;
+    border: 2px solid hotpink;
+    border-radius: 5px;
+}
