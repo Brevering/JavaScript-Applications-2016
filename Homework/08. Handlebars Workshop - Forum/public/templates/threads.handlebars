@@ -1,0 +1,20 @@
+<div id="container-thraeds" class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Threads</h3>
+        </div>
+        <div id="threads" class="panel-body">
+            {{#result}}
+                <div class="thread">
+                    <div><h3><a class="thread-title" href="/{{id}}">{{title}}</a></h3></div>
+                    <div>
+                        <p>
+                        <span>Created on </span><span class="thread-date">{{#if postDate}}{{postDate}}{{else}}Unknown{{/if}}</span>
+                        by <a class="thread-creator" href="#">{{username}}</a>
+                        </p>
+                    </div>
+                </div>
+            {{/result}}
+        </div>
+      </div>
+    </div>

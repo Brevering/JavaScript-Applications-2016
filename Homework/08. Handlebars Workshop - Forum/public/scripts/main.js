@@ -38,32 +38,32 @@ $(() => { // on document ready
   }
 
   // start threads
-  function loadThreadsContent(threads) {
-    let container = $($('#threads-container-template').text()),
-        threadsContainer = container.find('#threads');
+  // function loadThreadsContent(threads) {
+  //   let container = $($('#threads-container-template').text()),
+  //       threadsContainer = container.find('#threads');
 
-    function getThreadUI(title, id, creator, date) {
-      let template = $($('#thread-template').text()).attr('data-id', id),
-          threadTitle = template.find('.thread-title').text(title),
-          threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
-          threadDate = template.find('.thread-date').text(date || 'unknown');
+  //   function getThreadUI(title, id, creator, date) {
+  //     let template = $($('#thread-template').text()).attr('data-id', id),
+  //         threadTitle = template.find('.thread-title').text(title),
+  //         threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
+  //         threadDate = template.find('.thread-date').text(date || 'unknown');
 
-      return template.clone(true);
-    }
-    function getAddNewThreadUI() {
-      let template = $($('#thread-new-template').html());
-      return template.clone(true);
-    }
+  //     return template.clone(true);
+  //   }
+  //   function getAddNewThreadUI() {
+  //     let template = $($('#thread-new-template').html());
+  //     return template.clone(true);
+  //   }
 
-    threads.forEach((th) => {
-      let currentThreadUI = getThreadUI(th.title, th.id, th.username, th.postDate);
-      threadsContainer.append(currentThreadUI);
-    })
-    threadsContainer.append(getAddNewThreadUI());
+  //   threads.forEach((th) => {
+  //     let currentThreadUI = getThreadUI(th.title, th.id, th.username, th.postDate);
+  //     threadsContainer.append(currentThreadUI);
+  //   })
+  //   threadsContainer.append(getAddNewThreadUI());
 
-    contentContainer.find('#container-thraeds').remove();
-    contentContainer.html('').prepend(container);
-  }
+  //   contentContainer.find('#container-thraeds').remove();
+  //   contentContainer.html('').prepend(container);
+  // }
 
   function loadMessagesContent(data) {
     let container = $($('#messages-container-template').text()),
@@ -96,37 +96,12 @@ $(() => { // on document ready
     contentContainer.append(container);
   }
 
-  function loadGalleryContent(data) {
-    let list = data.data.children,
-        containerGallery = $($('#gallery-container-tempalte').text()),
-        containerImgs = containerGallery.find('#gallery-imgs'),
-        item = $($('#gallery-img-tempalte').text()),
-        itemImg = item.find('img.gallery-item-img'),
-        itemTitle = item.find('.gallery-item-title')
-
-    list.forEach((el) => {
-      itemTitle.text(el.data.title);
-      itemImg.attr('src', el.data.thumbnail);
-
-      containerImgs.append(item.clone(true));
-    });
-
-    contentContainer.html('').append(containerGallery);
-  }
-
   navbar.on('click', 'li', (ev) => {
     let $target = $(ev.target);
     $target.parents('nav').find('li').removeClass('active');
     $target.parents('li').addClass('active');
   });
-
-  navbar.on('click', '#btn-threads', (ev) => {
-    data.threads.get()
-        .then((data) => {
-          loadThreadsContent(data.result)
-        })
-  });
-
+  
   contentContainer.on('click', '#btn-add-thread', (ev) => {
     let title = $(ev.target).parents('form').find('input#input-add-thread').val() || null;
     data.threads.add(title)
