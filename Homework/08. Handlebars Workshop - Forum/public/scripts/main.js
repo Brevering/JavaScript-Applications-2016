@@ -1,4 +1,7 @@
-﻿$(() => { // on document ready
+﻿import { data } from './data.js';
+import { router } from './routing.js';
+
+$(() => { // on document ready
   const GLYPH_UP = 'glyphicon-chevron-up',
         GLYPH_DOWN = 'glyphicon-chevron-down',
         root = $('#root'),
@@ -10,6 +13,8 @@
         usernameSpan = $('#span-username'),
         usernameInput = $('#login input'),
         alertTemplate = $($('#alert-template').text());
+
+        router.init();
 
   (function checkForLoggedUser() {
     data.users.current()
@@ -165,16 +170,7 @@
 
     $target.parents('.container-messages').find('.messages').toggle();
   });
-  // end threads
-
-  // start gallery
-  navbar.on('click', '#btn-gallery', (ev) => {
-    data.gallery.get()
-      .then(loadGalleryContent)
-      .catch(console.log)
-  })
-  // end gallery
-
+  // end threads  
   // start login/logout
   navbar.on('click', '#btn-login', (ev) => {
     let username = usernameInput.val() || 'anonymous';

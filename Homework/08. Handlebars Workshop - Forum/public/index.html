@@ -20,6 +20,16 @@
         text-overflow: ellipsis;
       }
   </style>
+   <!-- libs -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="./node_modules/navigo/lib/navigo.js"></script>
+  <script src="./node_modules/handlebars/dist/handlebars.js"></script>
+  <script src="./node_modules/systemjs/dist/system.js"></script>
+  <script src="./scripts/system-config.js"></script>
+    <script>
+        System.import('main');
+    </script>
+
 </head>
 <body>
   <div id="root" class="container">
@@ -29,8 +39,8 @@
       </div>
       <nav class="navbar navbar-default navbar-collapse collapse">
         <ul id="main-nav" class="nav navbar-nav">
-          <li><a href="#" id="btn-threads">Threads</a></li>
-          <li><a href="#" id="btn-gallery">Gallery</a></li>
+          <li><a href="#/threads" id="btn-threads">Threads</a></li>
+          <li><a href="#/gallery" id="btn-gallery">Gallery</a></li>
         </ul>
         <ul class="nav nav navbar-nav navbar-right">
           <li><a href="#">Chat <span class="badge">42</span></a></li>
@@ -139,32 +149,9 @@
     <div class="alert col-lg-6" style="position: absolute; top: 14%; left: 25%;"></div>
   </script>
 
-  <script id="gallery-container-tempalte" type="text/template">
-    <div id="container-gallery" class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Gallery</h3>
-        </div>
-        <div id="gallery-imgs" class="panel-body">
-        </div>
-      </div>
-    </div>
-  </script>
-
-  <script id="gallery-img-tempalte" type="text/template">
-    <div class="gallery-item img-thumbnail pull-xs-left col-lg-2 col-md-2 col-sm-2 col-xs-2">
-      <img class="gallery-item-img" />
-      <h4 class="gallery-item-title"></h4>
-    </div>
-  </script>
+  
   <!-- end templates -->
-  <!-- libs -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-
-  <!-- app code -->
-  <script src="./scripts/data.js"></script>
-  <script src="./scripts/main.js"></script>
-  <script src="./node_modules/handlebars/dist/handlebars.js"></script>
+ 
 
 </body>
 </html>
