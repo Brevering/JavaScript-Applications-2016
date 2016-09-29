@@ -5,16 +5,25 @@
         </div>
         <div id="threads" class="panel-body">
             {{#result}}
-                <div class="thread">
-                    <div><h3><a class="thread-title" href="/{{id}}">{{title}}</a></h3></div>
+                <div class="thread" data-id={{id}}>
+                    <div><h3><a class="thread-title" href="#/threads/{{id}}">{{title}}</a></h3></div>
                     <div>
                         <p>
-                        <span>Created on </span><span class="thread-date">{{#if postDate}}{{postDate}}{{else}}Unknown{{/if}}</span>
-                        by <a class="thread-creator" href="#">{{username}}</a>
+                        <span>Created on </span><span class="thread-date">{{#if postDate}}{{postDate}}{{else}}unknown{{/if}}</span>
+                        by <a class="thread-creator" href="#">{{#if username}}{{username}}{{else}}anonymous{{/if}}</a>
                         </p>
                     </div>
                 </div>
             {{/result}}
+            <form class="navbar-form navbar-left" role="search">
+                <h4>Create new Thread:</h4>
+                <div class="input-group">
+                    <input id="input-add-thread" class="thread-title form-control" placeholder="Thread Title" />
+                    <span class="input-group-btn">
+                    <button id="btn-add-thread" class="btn btn-success" type="submit">Add</button>
+                    </span>
+                </div>
+            </form>
         </div>
       </div>
     </div>

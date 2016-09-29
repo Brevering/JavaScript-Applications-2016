@@ -7,12 +7,17 @@ var router = (() => {
     function init() {
         navigo = new Navigo(null, false);
 
-        navigo.on('/threads', () => {
+        navigo
+        .on('/threads/:id', (params) => {
+            Promise.all([data.threads.getById(params.id), tl.get('messages')])                                            
+            .then(([data, template]) => {                
+                $('#content').append(template(data))})            
+            .catch(console.log)
+        })
+        .on('/threads', () => {
             Promise.all([data.threads.get(), tl.get('threads')])                                            
-            .then(([data, template]) => {
-                console.log(data);
-                $('#content').html(template(data))})
-            .then(console.log)
+            .then(([data, template]) => {                
+                $('#content').html(template(data))})            
             .catch(console.log)
         })
         .on('/gallery', () => {
@@ -20,6 +25,7 @@ var router = (() => {
             .then(([data, template]) => $('#content').html(template(data)))
             .catch(console.log)            
         })
+        
     }
 
     return {
