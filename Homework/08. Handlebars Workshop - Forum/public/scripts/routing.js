@@ -10,8 +10,8 @@ var router = (() => {
         navigo
         .on('/threads/:id', (params) => {
             Promise.all([data.threads.getById(params.id), tl.get('messages')])                                            
-            .then(([data, template]) => {                
-                $('#content').append(template(data))})            
+            .then(([data, template]) => {
+                $('#container-thraeds').after(template(data))})            
             .catch(console.log)
         })
         .on('/threads', () => {

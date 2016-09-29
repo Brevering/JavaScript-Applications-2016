@@ -115,7 +115,7 @@ function threadsCreate(thread) {
       return;
     }
     thread.id = threadsIdGen.next();
-    thread.postDate = new Date();
+    thread.postDate = new Date().toDateString();
     storage.threads.push(thread);
     resolve(thread);
   });
@@ -137,7 +137,7 @@ function threadsAddMessage(id, msg) {
         thread.messages = [];
       }
 
-      msg.postDate = new Date();
+      msg.postDate = new Date().toDateString();
       thread.messages.push(msg);
       return thread;
     });

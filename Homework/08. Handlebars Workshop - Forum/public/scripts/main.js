@@ -70,8 +70,11 @@ $(() => { // on document ready
     data.threads.addMessage(thId, msg)
       .then((params) => {
             Promise.all([data.threads.getById(params.id), tl.get('messages')])                                            
-            .then(([data, template]) => {                
-                $('#content').append(template(data))})            
+            .then(([data, template]) => {
+                $('#msg-container').remove();
+                $('#container-thraeds').after(template(data))
+                //$('#content').append(template(data))
+              })            
             .catch(console.log)
         })      
       .then(showMsg('Successfuly added the new mssagee', 'Success', 'alert-success'))
