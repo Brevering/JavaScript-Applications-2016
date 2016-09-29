@@ -39,10 +39,7 @@ var data = (function () {
             data: JSON.stringify(body),
             contentType: 'application/json',
           }).done((data) => {
-            resolve(data);
-            $('#btn-threads').trigger('click');
-            $('#btn-threads').trigger('click');
-
+            resolve(data);           
           })
             .fail((err) => reject(err));
         })
@@ -73,9 +70,7 @@ var data = (function () {
             contentType: 'application/json',
           })
             .done((data) => {
-              resolve(data);
-              $('#btn-threads').trigger('click');
-              $(`div[data-id ="${threadId}"] > div > h3 > a`).trigger('click');
+              resolve(data);              
             })
             .fail((err) => reject(err));
 

@@ -2,10 +2,10 @@ import { data } from './data.js';
 import { templateLoader as tl} from './template-loader.js';
 
 var router = (() => {
-    let navigo;
+    let navigo = new Navigo(null, false);
 
     function init() {
-        navigo = new Navigo(null, false);
+        //navigo = new Navigo(null, false);
 
         navigo
         .on('/threads/:id', (params) => {
@@ -25,12 +25,14 @@ var router = (() => {
             .then(([data, template]) => $('#content').html(template(data)))
             .catch(console.log)            
         })
-        
-    }
 
+    }
+    
     return {
         init
     }
 })();
+
+
 
 export { router };

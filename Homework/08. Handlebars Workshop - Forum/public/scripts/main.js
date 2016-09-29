@@ -1,4 +1,5 @@
 ﻿import { data } from './data.js';
+import { templateLoader as tl} from './template-loader.js';
 import { router } from './routing.js';
 
 $(() => { // on document ready
@@ -15,6 +16,7 @@ $(() => { // on document ready
         alertTemplate = $($('#alert-template').text());
 
         router.init();
+        
 
   (function checkForLoggedUser() {
     data.users.current()
@@ -37,92 +39,52 @@ $(() => { // on document ready
     }, delay || 2000)
   }
 
-  // start threads
-  // function loadThreadsContent(threads) {
-  //   let container = $($('#threads-container-template').text()),
-  //       threadsContainer = container.find('#threads');
-
-  //   function getThreadUI(title, id, creator, date) {
-  //     let template = $($('#thread-template').text()).attr('data-id', id),
-  //         threadTitle = template.find('.thread-title').text(title),
-  //         threadCreator = template.find('.thread-creator').text(creator || 'anonymous'),
-  //         threadDate = template.find('.thread-date').text(date || 'unknown');
-
-  //     return template.clone(true);
-  //   }
-    // function getAddNewThreadUI() {
-    //   let template = $($('#thread-new-template').html());
-    //   return template.clone(true);
-    // }
-
-  //   threads.forEach((th) => {
-  //     let currentThreadUI = getThreadUI(th.title, th.id, th.username, th.postDate);
-  //     threadsContainer.append(currentThreadUI);
-  //   })
-  //  threadsContainer.append(getAddNewThreadUI());
-
-  //   contentContainer.find('#container-thraeds').remove();
-  //   contentContainer.html('').prepend(container);
-  // }
-
-  // function loadMessagesContent(data) {
-  //   let container = $($('#messages-container-template').text()),
-  //       messagesContainer = container.find('.panel-body');
-  //   container.attr('data-thread-id', data.id);
-  
-  
-  //   function getAddNewMsgUI() {
-  //     let template = $($('#message-new-template').html());
-  //     return template.clone(true);
-  //   }
-
- 
-
-  //    messagesContainer.append(getAddNewMsgUI());
-
-  //    container.find('.thread-title').text(data.result.title);
-  //    contentContainer.append(container);
-  //  }
-
-  navbar.on('click', 'li', (ev) => {
+   navbar.on('click', 'li', (ev) => {
     let $target = $(ev.target);
     $target.parents('nav').find('li').removeClass('active');
     $target.parents('li').addClass('active');
   });
 
   contentContainer.on('click', '#btn-add-thread', (ev) => {
+
     let title = $(ev.target).parents('form').find('input#input-add-thread').val() || null;
+    ev.preventDefault();
     data.threads.add(title)
-      .then((thread) => {
-        // loadThreadsContent([thread]);
-      })
-      .then(() => $('#btn-threads').trigger('click'))
+      .then(() => {
+            Promise.all([data.threads.get(), tl.get('threads')])                                            
+            .then(([data, template]) => {                
+                $('#content').html(template(data))})            
+            .catch(console.log)
+        })
       .then(showMsg('Successfuly added the new thread', 'Success', 'alert-success'))
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   })
 
   contentContainer.on('click', '.btn-add-message', (ev) => {
+    ev.preventDefault();
     let $target = $(ev.target),
       $container = $target.parents('.container-messages'),
       thId = $container.attr('data-thread-id'),
       msg = $container.find('.input-add-message').val();
 
     data.threads.addMessage(thId, msg)
-      .then((message) => {
-      })
-      .then(() => {
-        const btn = $('#thread-' + thId);
-        btn.trigger('click');
-      })
+      .then((params) => {
+            Promise.all([data.threads.getById(params.id), tl.get('messages')])                                            
+            .then(([data, template]) => {                
+                $('#content').append(template(data))})            
+            .catch(console.log)
+        })      
       .then(showMsg('Successfuly added the new mssagee', 'Success', 'alert-success'))
       .catch((err) => showMsg(JSON.parse(err.responseText).err, 'Error', 'alert-danger'));
   })
 
   contentContainer.on('click', '.btn-close-msg', (ev) => {
+    ev.preventDefault();
     let msgContainer = $(ev.target).parents('.container-messages').remove();
   });
 
   contentContainer.on('click', '.btn-collapse-msg', (ev) => {
+    ev.preventDefault;
     let $target = $(ev.target);
     if ($target.hasClass(GLYPH_UP)) {
       $target.removeClass(GLYPH_UP).addClass(GLYPH_DOWN);
@@ -130,8 +92,8 @@ $(() => { // on document ready
       $target.removeClass(GLYPH_DOWN).addClass(GLYPH_UP);
     }
 
-$target.parents('.container-messages').find('.messages').toggle();
-  });
+    $target.parents('.container-messages').find('.messages').toggle();
+});
   // end threads  
   // start login/logout
   navbar.on('click', '#btn-login', (ev) => {
