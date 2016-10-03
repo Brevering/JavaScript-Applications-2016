@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "username": "Lars1113",
+      "passHash": "bb974804b15bf801a03fc471f5a579472d4ab64f",
+      "usernameToLower": "lars1113",
+      "id": "001de5c7-b752-4881-9474-03318441d831",
+      "authKey": "001de5c7-b752-4881-9474-03318441d831kPLChMqZwJtbvxfXhyjWTlnn"
+    },
+    {
+      "username": "Gosho1",
+      "passHash": "3c39c5f07a49c62d8f30ef0c7eae561c931b87f0",
+      "usernameToLower": "gosho1",
+      "id": "c5cfcae0-cc0d-47a0-9adf-3e34a4a0ca3c",
+      "authKey": "c5cfcae0-cc0d-47a0-9adf-3e34a4a0ca3ccZcbEHZbKnjsqHgPVjyXaKJL"
+    }
+  ],
+  "items": [
+    {
+      "text": "Test item 1",
+      "category": "I have no idea",
+      "img": "https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-9/14484768_10210130210433936_8353637353733088692_n.jpg?oh=4254a3c747d445586dcf522039ca4e53&oe=5873B3DF",
+      "userId": "001de5c7-b752-4881-9474-03318441d831",
+      "likes": 2,
+      "dislikes": 2,
+      "shareDate": "2016-10-03T19:51:15.283Z",
+      "id": "d0834e77-9a3f-4372-b51a-003be531369f"
+    },
+    {
+      "text": "Test item 1",
+      "category": "I have no idea",
+      "img": "https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-9/14484768_10210130210433936_8353637353733088692_n.jpg?oh=4254a3c747d445586dcf522039ca4e53&oe=5873B3DF",
+      "userId": "c5cfcae0-cc0d-47a0-9adf-3e34a4a0ca3c",
+      "likes": 0,
+      "dislikes": 0,
+      "shareDate": "2016-10-03T19:52:22.401Z",
+      "id": "1905d41c-0ab9-4744-bb83-48a14762add3"
+    }
+  ]
+}
